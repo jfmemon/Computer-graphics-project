@@ -424,8 +424,8 @@ void boat(){
     glBegin(GL_POLYGON);
     glVertex3f(b,0.33,0.0);
     glVertex3f(b+0.01,0.33,0.0);
-    glVertex3f(b+0.01,0.42,0.0);
-    glVertex3f(b,0.42,0.0);
+    glVertex3f(b+0.01,0.43,0.0);
+    glVertex3f(b,0.43,0.0);
     glEnd();
 
 
@@ -445,6 +445,7 @@ void boat(){
     glVertex3f(d+0.03,0.34,0.0);
     glVertex3f(d,0.42,0.0);
     glEnd();
+
 }
 
 void hill(){
@@ -683,6 +684,7 @@ void cloud(){
 
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
     field();
     home();
     river();
@@ -736,13 +738,13 @@ int state = 1;
 
 void timer(int)
 {
-    glutPostRedisplay();
-    glutTimerFunc(1000/5,timer,0);
+    glutPostRedisplay();        //opengl call the display function the next time it gets the change.
+    glutTimerFunc(1000/5,timer,0);   //timer function calling itself 5 times in 1 second.
 
     switch(state)
     {
     case 1:
-        if(a<1.00 && b<1.00 && c<1.00 && d<1.00){
+        if(a<1.10 && b<1.10 && c<1.10 && d<1.10){
             a+=0.03;
             b+=0.03;
             c+=0.03;
