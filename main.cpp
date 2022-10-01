@@ -6,6 +6,10 @@
 #include<math.h>
 
 
+void reshape(int,int);
+void timer(int);
+
+
 //user define functions:
 
 
@@ -400,47 +404,46 @@ void river(){
     glEnd();
 }
 
+float a = 0.00, b=0.06, c=0.02, d=0.07 ;
+
 void boat(){
-    //boat moving functions
-    /*glLoadIdentity();
-    counter=counter-0.09;
-    glTranslated(counter,100,0.0);*/
+
 
     //boat under decoration
     glColor3f(0.3, 0.1, 0.0);
     glBegin(GL_POLYGON);
-    glVertex3f(0.23,0.30,0.0);
-    glVertex3f(0.30,0.30,0.0);
-    glVertex3f(0.32,0.33,0.0);
-    glVertex3f(0.20,0.33,0.0);
+    glVertex3f(a,0.33,0.0);
+    glVertex3f(a+0.03,0.30,0.0);
+    glVertex3f(a+0.10,0.30,0.0);
+    glVertex3f(a+0.12,0.33,0.0);
     glEnd();
 
 
     //boat stick decoration
     glColor3f(0.3, 0.1, 0.2);
     glBegin(GL_POLYGON);
-    glVertex3f(0.26,0.33,0.0);
-    glVertex3f(0.27,0.33,0.0);
-    glVertex3f(0.27,0.42,0.0);
-    glVertex3f(0.26,0.42,0.0);
+    glVertex3f(b,0.33,0.0);
+    glVertex3f(b+0.01,0.33,0.0);
+    glVertex3f(b+0.01,0.42,0.0);
+    glVertex3f(b,0.42,0.0);
     glEnd();
 
 
     //boat left sail decoration
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_TRIANGLES);
-    glVertex3f(0.22,0.34,0.0);
-    glVertex3f(0.26,0.34,0.0);
-    glVertex3f(0.26,0.41,0.0);
+    glVertex3f(c,0.34,0.0);
+    glVertex3f(c+0.04,0.34,0.0);
+    glVertex3f(c+0.04,0.41,0.0);
     glEnd();
 
 
     //boat right sail decoration
     glColor3f(8.0, 0.0, 0.0);
     glBegin(GL_TRIANGLES);
-    glVertex3f(0.27,0.34,0.0);
-    glVertex3f(0.30,0.34,0.0);
-    glVertex3f(0.27,0.42,0.0);
+    glVertex3f(d,0.34,0.0);
+    glVertex3f(d+0.03,0.34,0.0);
+    glVertex3f(d,0.42,0.0);
     glEnd();
 }
 
@@ -693,7 +696,7 @@ void display(void){
     // Initialize function:
 
 void init(void){
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClearColor(0.0,0.0,0.0,0.0);  // fix windows background color
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0,1.0,0.0,1.0, 0.0,1.0);
@@ -710,6 +713,54 @@ int main(int argc, char** argv)
     glutCreateWindow("Beauty of nature");
     init();
     glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    glutTimerFunc(1000,timer,0);
     glutMainLoop();
     return 0;
 }
+
+
+
+
+void reshape(int w,int h)
+{
+    glViewport(0,0,(GLsizei)w,(GLsizei)h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0,1.0,0.0,1.0);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+
+int state = 1;
+
+void timer(int)
+{
+    glutPostRedisplay();
+    glutTimerFunc(1000/5,timer,0);
+
+    switch(state)
+    {
+    case 1:
+        if(a<1.20 && b<1.20 && c<1.20 && d<1.20){
+            a+=0.10;
+            b+=0.10;
+            c+=0.10;
+            d+=0.10;
+        }
+    else
+        state = -1;
+        break;
+    case -1:
+        if(a>-10 && b>-10 && c>-10 && d>-10){
+            a-=0.15;
+            b-=0.15;
+            c-=0.15;
+            d-=0.15;
+        }
+        else
+            state = 1;
+        break;
+    }
+}
+
