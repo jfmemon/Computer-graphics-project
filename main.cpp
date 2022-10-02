@@ -739,7 +739,7 @@ int state = 1;
 void timer(int)
 {
     glutPostRedisplay();        //opengl call the display function the next time it gets the changes.
-    glutTimerFunc(1000/550,timer,0);   //timer function calling itself 550 times in 1 second.
+    glutTimerFunc(1000/700,timer,0);   //timer function calling itself 550 times in 1 second.
 
     switch(state)
     {
