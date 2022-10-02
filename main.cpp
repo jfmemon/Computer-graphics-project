@@ -739,26 +739,26 @@ int state = 1;
 void timer(int)
 {
     glutPostRedisplay();        //opengl call the display function the next time it gets the changes.
-    glutTimerFunc(1000/5,timer,0);   //timer function calling itself 5 times in 1 second.
+    glutTimerFunc(1000/550,timer,0);   //timer function calling itself 550 times in 1 second.
 
     switch(state)
     {
     case 1:
         if(a<1.10 && b<1.10 && c<1.10 && d<1.10){
-            a+=0.01;
-            b+=0.01;
-            c+=0.01;
-            d+=0.01;
+            a+=0.0001;
+            b+=0.0001;
+            c+=0.0001;
+            d+=0.0001;
         }
     else
         state = -1;
         break;
     case -1:
         if(a>-0.15 && b>-0.15 && c>-0.15 && d>-0.15){
-            a-=0.01;
-            b-=0.01;
-            c-=0.01;
-            d-=0.01;
+            a-=0.0001;
+            b-=0.0001;
+            c-=0.0001;
+            d-=0.0001;
         }
         else
             state = 1;
