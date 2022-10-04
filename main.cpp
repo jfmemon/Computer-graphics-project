@@ -420,7 +420,7 @@ void boat(){
 
 
     //boat stick decoration
-    glColor3f(0.3, 0.1, 0.2);
+    glColor3f(0.3, 0.1, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f(b,0.33,0.0);
     glVertex3f(b+0.01,0.33,0.0);
@@ -739,7 +739,7 @@ int state = 1;
 void timer(int)
 {
     glutPostRedisplay();        //opengl call the display function the next time it gets the changes.
-    glutTimerFunc(1000/700,timer,0);   //timer function calling itself 550 times in 1 second.
+    glutTimerFunc(1000/700,timer,0);   //timer function calling itself 1000/700 times in 1 second.
 
     switch(state)
     {
